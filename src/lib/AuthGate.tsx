@@ -2,10 +2,8 @@ import { useEffect, useState } from "react"
 import netlifyIdentity from "netlify-identity-widget"
 import type { User } from "netlify-identity-widget"
 
-netlifyIdentity.init()
-
 export function AuthGate({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(netlifyIdentity.currentUser())
+  const [user, setUser] = useState<User | null>(null)
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
@@ -18,6 +16,8 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
       netlifyIdentity.close()
     })
     netlifyIdentity.on("logout", () => setUser(null))
+
+    netlifyIdentity.init()
 
     return () => {
       netlifyIdentity.off("init")
