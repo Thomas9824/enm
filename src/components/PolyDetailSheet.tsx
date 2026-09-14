@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { X, Trash2, BookOpen, Check } from "lucide-react"
+import { X, Trash2, Check } from "lucide-react"
 import { PolyIcon, ICON_OPTIONS } from "@/components/PolyIcon"
 import type { Poly, LucideIconName } from "@/types"
 
@@ -63,10 +63,10 @@ export const PolyDetailSheet: React.FC<PolyDetailSheetProps> = ({
       />
 
       {/* Sheet */}
-      <aside className="fixed top-0 right-0 bottom-0 z-50 w-full max-w-md bg-[var(--color-card)] border-l border-[var(--color-border)] shadow-2xl flex flex-col overflow-y-auto">
+      <aside className="fixed top-0 right-0 bottom-0 z-50 w-full max-w-lg bg-[var(--color-card)] border-l border-[var(--color-border)] shadow-2xl flex flex-col overflow-y-auto">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--color-border)]">
-          <span className="text-xs text-[var(--color-muted-foreground)]">Détails du polycopié</span>
+        <div className="flex items-center justify-between px-7 py-5 border-b border-[var(--color-border)]">
+          <span className="text-sm text-[var(--color-muted-foreground)]">Détails du polycopié</span>
           <div className="flex items-center gap-1">
             <button
               onClick={handleDelete}
@@ -83,12 +83,12 @@ export const PolyDetailSheet: React.FC<PolyDetailSheetProps> = ({
           </div>
         </div>
 
-        <div className="flex-1 p-6 space-y-6">
+        <div className="flex-1 p-7 space-y-6">
           {/* Icon + Title */}
           <div className="relative flex items-center gap-3">
             <button
               onClick={() => setShowIconPicker(!showIconPicker)}
-              className="p-2.5 rounded-xl bg-[var(--color-secondary)] hover:bg-[#fce7f3] hover:text-[#f472b6] text-[var(--color-muted-foreground)] transition-colors"
+              className="p-2.5 rounded-xl bg-[var(--color-secondary)] hover:bg-[var(--color-poly-light)] hover:text-[var(--color-poly)] text-[var(--color-muted-foreground)] transition-colors"
             >
               <PolyIcon name={iconName} className="w-5 h-5" />
             </button>
@@ -98,7 +98,7 @@ export const PolyDetailSheet: React.FC<PolyDetailSheetProps> = ({
                   <button
                     key={opt.name}
                     onClick={() => { setIconName(opt.name); setShowIconPicker(false) }}
-                    className={`p-2 rounded-xl transition-colors flex items-center justify-center ${iconName === opt.name ? "bg-[#fce7f3] text-[#f472b6]" : "hover:bg-[var(--color-secondary)] text-[var(--color-muted-foreground)]"}`}
+                    className={`p-2 rounded-xl transition-colors flex items-center justify-center ${iconName === opt.name ? "bg-[var(--color-poly-light)] text-[var(--color-poly)]" : "hover:bg-[var(--color-secondary)] text-[var(--color-muted-foreground)]"}`}
                     title={opt.label}
                   >
                     <PolyIcon name={opt.name} className="w-4 h-4" />
@@ -115,15 +115,15 @@ export const PolyDetailSheet: React.FC<PolyDetailSheetProps> = ({
           </div>
 
           {/* Progress Display */}
-          <div className="p-4 rounded-2xl bg-[var(--color-secondary)] border border-[var(--color-border)]">
+          <div className="p-5 rounded-2xl bg-[var(--color-secondary)] border border-[var(--color-border)]">
             <div className="flex items-end justify-between mb-3">
-              <span className="text-3xl font-bold" style={{ color: pct > 0 ? "#f472b6" : "var(--color-muted-foreground)" }}>{pct}%</span>
-              <span className="text-xs text-[var(--color-muted-foreground)]">{safeRead} / {safeTotal} pages</span>
+              <span className="text-3xl font-bold" style={{ color: pct > 0 ? "var(--color-poly)" : "var(--color-muted-foreground)" }}>{pct}%</span>
+              <span className="text-sm text-[var(--color-muted-foreground)]">{safeRead} / {safeTotal} pages</span>
             </div>
             <div className="h-2 w-full rounded-full bg-[var(--color-card)]">
               <div
                 className="h-full rounded-full transition-all duration-300"
-                style={{ width: `${pct}%`, backgroundColor: isComplete ? "#f472b6" : pct > 0 ? "#f9a8d4" : "transparent" }}
+                style={{ width: `${pct}%`, backgroundColor: isComplete ? "var(--color-poly)" : pct > 0 ? "var(--color-poly-muted)" : "transparent" }}
               />
             </div>
           </div>
@@ -136,7 +136,7 @@ export const PolyDetailSheet: React.FC<PolyDetailSheetProps> = ({
                 <button
                   key={d}
                   onClick={() => setReadPages(Math.max(0, Math.min(safeTotal, safeRead + d)))}
-                  className="flex-1 py-1.5 text-xs font-medium rounded-lg bg-[var(--color-secondary)] hover:bg-[#fce7f3] hover:text-[#f472b6] text-[var(--color-muted-foreground)] transition-colors"
+                  className="flex-1 py-1.5 text-xs font-medium rounded-lg bg-[var(--color-secondary)] hover:bg-[var(--color-poly-light)] hover:text-[var(--color-poly)] text-[var(--color-muted-foreground)] transition-colors"
                 >
                   {d > 0 ? `+${d}` : d}
                 </button>
@@ -149,7 +149,7 @@ export const PolyDetailSheet: React.FC<PolyDetailSheetProps> = ({
                 min={0}
                 max={safeTotal}
                 onChange={(e) => setReadPages(parseInt(e.target.value) || 0)}
-                className="w-20 text-center text-sm font-semibold py-1.5 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] text-[var(--color-foreground)] focus:outline-none focus:ring-2 focus:ring-[#f472b6]/30"
+                className="w-20 text-center text-sm font-semibold py-1.5 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] text-[var(--color-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--color-poly)]/30"
               />
               <span className="text-xs text-[var(--color-muted-foreground)]">sur</span>
               <input
@@ -157,13 +157,13 @@ export const PolyDetailSheet: React.FC<PolyDetailSheetProps> = ({
                 value={safeTotal}
                 min={1}
                 onChange={(e) => setTotalPages(parseInt(e.target.value) || 1)}
-                className="w-20 text-center text-sm font-semibold py-1.5 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] text-[var(--color-foreground)] focus:outline-none focus:ring-2 focus:ring-[#f472b6]/30"
+                className="w-20 text-center text-sm font-semibold py-1.5 rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] text-[var(--color-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--color-poly)]/30"
               />
               <span className="text-xs text-[var(--color-muted-foreground)]">pages</span>
               {!isComplete && (
                 <button
                   onClick={() => setReadPages(safeTotal)}
-                  className="ml-auto text-xs px-3 py-1.5 rounded-lg bg-[#fce7f3] text-[#f472b6] hover:bg-[#f472b6] hover:text-white transition-colors font-medium"
+                  className="ml-auto text-xs px-3 py-1.5 rounded-lg bg-[var(--color-poly-light)] text-[var(--color-poly)] hover:bg-[var(--color-poly)] hover:text-white transition-colors font-medium"
                 >
                   Tout marquer
                 </button>
@@ -179,7 +179,7 @@ export const PolyDetailSheet: React.FC<PolyDetailSheetProps> = ({
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
                 placeholder="ex: Droit Pénal..."
-                className="w-full text-sm py-2 px-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-secondary)] text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] focus:outline-none focus:ring-2 focus:ring-[#f472b6]/30"
+                className="w-full text-sm py-2 px-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-secondary)] text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--color-poly)]/30"
               />
             </div>
             <div>
@@ -188,7 +188,7 @@ export const PolyDetailSheet: React.FC<PolyDetailSheetProps> = ({
                 type="date"
                 value={deadline}
                 onChange={(e) => setDeadline(e.target.value)}
-                className="w-full text-sm py-2 px-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-secondary)] text-[var(--color-foreground)] focus:outline-none focus:ring-2 focus:ring-[#f472b6]/30"
+                className="w-full text-sm py-2 px-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-secondary)] text-[var(--color-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--color-poly)]/30"
               />
             </div>
           </div>
@@ -201,13 +201,13 @@ export const PolyDetailSheet: React.FC<PolyDetailSheetProps> = ({
               onChange={(e) => setNotes(e.target.value)}
               placeholder="Ajoutez vos notes de révision..."
               rows={4}
-              className="w-full text-sm py-2 px-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-secondary)] text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] focus:outline-none focus:ring-2 focus:ring-[#f472b6]/30 resize-none"
+              className="w-full text-sm py-2 px-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-secondary)] text-[var(--color-foreground)] placeholder:text-[var(--color-muted-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--color-poly)]/30 resize-none"
             />
           </div>
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-[var(--color-border)] flex gap-2">
+        <div className="px-7 py-5 border-t border-[var(--color-border)] flex gap-2">
           <button
             onClick={onClose}
             className="flex-1 py-2 text-sm rounded-xl border border-[var(--color-border)] text-[var(--color-muted-foreground)] hover:bg-[var(--color-secondary)] transition-colors"

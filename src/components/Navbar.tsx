@@ -27,7 +27,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <span>Espace ENM</span>
         </div>
         <span>/</span>
-        <span className="hover:text-foreground cursor-pointer transition-colors">Révisions</span>
+        <span className="hover:text-foreground cursor-pointer transition-colors">Prépa</span>
         <span>/</span>
         <span className="text-foreground font-medium">Polycopiés & Progression</span>
       </div>

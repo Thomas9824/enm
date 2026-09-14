@@ -15,11 +15,11 @@ export const PolyTable: React.FC<PolyTableProps> = ({ polys, onSelect, onStep })
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b border-[var(--color-border)] bg-[var(--color-secondary)]">
-            <th className="text-left px-4 py-3 text-xs font-medium text-[var(--color-muted-foreground)] w-8"></th>
-            <th className="text-left px-4 py-3 text-xs font-medium text-[var(--color-muted-foreground)]">Polycopié</th>
-            <th className="text-left px-4 py-3 text-xs font-medium text-[var(--color-muted-foreground)] w-32 hidden sm:table-cell">Pages</th>
-            <th className="text-left px-4 py-3 text-xs font-medium text-[var(--color-muted-foreground)] w-48">Progression</th>
-            <th className="px-4 py-3 w-24 text-right text-xs font-medium text-[var(--color-muted-foreground)]">Actions</th>
+            <th className="text-left px-5 py-3.5 text-xs font-medium text-[var(--color-muted-foreground)] w-10"></th>
+            <th className="text-left px-5 py-3.5 text-xs font-medium text-[var(--color-muted-foreground)]">Polycopié</th>
+            <th className="text-left px-5 py-3.5 text-xs font-medium text-[var(--color-muted-foreground)] w-36 hidden sm:table-cell">Pages</th>
+            <th className="text-left px-5 py-3.5 text-xs font-medium text-[var(--color-muted-foreground)] w-52">Progression</th>
+            <th className="px-5 py-3.5 w-28 text-right text-xs font-medium text-[var(--color-muted-foreground)]">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -33,46 +33,46 @@ export const PolyTable: React.FC<PolyTableProps> = ({ polys, onSelect, onStep })
                 onClick={() => onSelect(poly)}
                 className="border-b border-[var(--color-border)] last:border-0 hover:bg-[var(--color-secondary)] cursor-pointer transition-colors group"
               >
-                <td className="px-4 py-3">
-                  <div className="text-[var(--color-muted-foreground)] group-hover:text-[#f472b6] transition-colors">
+                <td className="px-5 py-4">
+                  <div className="text-[var(--color-muted-foreground)] group-hover:text-[var(--color-poly)] transition-colors">
                     <PolyIcon name={poly.iconName} className="w-4 h-4" />
                   </div>
                 </td>
-                <td className="px-4 py-3">
+                <td className="px-5 py-4">
                   <div className="font-medium text-[var(--color-foreground)] text-sm">{poly.title}</div>
                   {poly.subject && (
-                    <div className="text-xs text-[var(--color-muted-foreground)]">{poly.subject}</div>
+                    <div className="text-sm text-[var(--color-muted-foreground)] mt-0.5">{poly.subject}</div>
                   )}
                 </td>
-                <td className="px-4 py-3 text-xs text-[var(--color-muted-foreground)] hidden sm:table-cell">
+                <td className="px-5 py-4 text-sm text-[var(--color-muted-foreground)] hidden sm:table-cell">
                   {poly.readPages} / {poly.totalPages}
                 </td>
-                <td className="px-4 py-3">
+                <td className="px-5 py-4">
                   <div className="flex items-center gap-2">
-                    <div className="flex-1 h-1 rounded-full bg-[var(--color-secondary)]">
+                    <div className="flex-1 h-1.5 rounded-full bg-[var(--color-secondary)]">
                       <div
                         className="h-full rounded-full transition-all duration-300"
-                        style={{ width: `${pct}%`, backgroundColor: isComplete ? "#f472b6" : pct > 0 ? "#f9a8d4" : "transparent" }}
+                        style={{ width: `${pct}%`, backgroundColor: isComplete ? "var(--color-poly)" : pct > 0 ? "var(--color-poly-muted)" : "transparent" }}
                       />
                     </div>
-                    <span className="text-xs font-bold w-8 text-right" style={{ color: pct > 0 ? "#f472b6" : "var(--color-muted-foreground)" }}>
+                    <span className="text-sm font-bold w-9 text-right" style={{ color: pct > 0 ? "var(--color-poly)" : "var(--color-muted-foreground)" }}>
                       {pct}%
                     </span>
                   </div>
                 </td>
-                <td className="px-4 py-3 text-right" onClick={(e) => e.stopPropagation()}>
-                  <div className="flex items-center justify-end gap-1">
+                <td className="px-5 py-4 text-right" onClick={(e) => e.stopPropagation()}>
+                  <div className="flex items-center justify-end gap-1.5">
                     <button
                       onClick={() => onStep(poly.id, 5)}
-                      className="px-2 py-1 text-[11px] rounded-md bg-[var(--color-secondary)] hover:bg-[#fce7f3] hover:text-[#f472b6] text-[var(--color-muted-foreground)] transition-colors font-medium"
+                      className="px-2.5 py-1.5 text-xs rounded-md bg-[var(--color-secondary)] hover:bg-[var(--color-poly-light)] hover:text-[var(--color-poly)] text-[var(--color-muted-foreground)] transition-colors font-medium"
                     >
                       +5
                     </button>
                     <button
                       onClick={() => onSelect(poly)}
-                      className="p-1 rounded-md text-[var(--color-muted-foreground)] hover:text-[var(--color-foreground)] hover:bg-[var(--color-secondary)] transition-colors"
+                      className="p-1.5 rounded-md text-[var(--color-muted-foreground)] hover:text-[var(--color-foreground)] hover:bg-[var(--color-secondary)] transition-colors"
                     >
-                      <ExternalLink className="w-3.5 h-3.5" />
+                      <ExternalLink className="w-4 h-4" />
                     </button>
                   </div>
                 </td>

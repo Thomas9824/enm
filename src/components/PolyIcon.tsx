@@ -12,6 +12,17 @@ import {
   Award,
   Compass,
   Bookmark,
+  Video,
+  PlayCircle,
+  Film,
+  Monitor,
+  TvMinimalPlay,
+  Tv,
+  ClipboardList,
+  Trophy,
+  Timer,
+  PenLine,
+  SquarePen,
   type LucideProps
 } from "lucide-react"
 import type { LucideIconName } from "@/types"
@@ -33,6 +44,17 @@ export const ICON_OPTIONS: { name: LucideIconName; label: string }[] = [
   { name: 'Compass', label: 'Orientation / Synthèse' },
   { name: 'Bookmark', label: 'Repère / Fiche' },
   { name: 'Search', label: 'Recherche / Analyse' },
+  { name: 'Video', label: 'Vidéo / Cours' },
+  { name: 'PlayCircle', label: 'Lecture / Cours' },
+  { name: 'Film', label: 'Film / Cinéma' },
+  { name: 'Monitor', label: 'Écran / Plateforme' },
+  { name: 'TvMinimalPlay', label: 'Streaming / ENM' },
+  { name: 'Tv', label: 'Télévision' },
+  { name: 'ClipboardList', label: 'Concours blanc' },
+  { name: 'Trophy', label: 'Trophée / Résultat' },
+  { name: 'Timer', label: 'Chronomètre' },
+  { name: 'PenLine', label: 'Rédaction' },
+  { name: 'SquarePen', label: 'Épreuve écrite' },
 ]
 
 export const PolyIcon: React.FC<PolyIconProps> = ({ name = 'BookOpen', className = "w-5 h-5", ...props }) => {
@@ -59,6 +81,28 @@ export const PolyIcon: React.FC<PolyIconProps> = ({ name = 'BookOpen', className
       return <Compass className={className} {...props} />
     case 'Bookmark':
       return <Bookmark className={className} {...props} />
+    case 'Video':
+      return <Video className={className} {...props} />
+    case 'PlayCircle':
+      return <PlayCircle className={className} {...props} />
+    case 'Film':
+      return <Film className={className} {...props} />
+    case 'Monitor':
+      return <Monitor className={className} {...props} />
+    case 'TvMinimalPlay':
+      return <TvMinimalPlay className={className} {...props} />
+    case 'Tv':
+      return <Tv className={className} {...props} />
+    case 'ClipboardList':
+      return <ClipboardList className={className} {...props} />
+    case 'Trophy':
+      return <Trophy className={className} {...props} />
+    case 'Timer':
+      return <Timer className={className} {...props} />
+    case 'PenLine':
+      return <PenLine className={className} {...props} />
+    case 'SquarePen':
+      return <SquarePen className={className} {...props} />
     case 'BookOpen':
     default:
       return <BookOpen className={className} {...props} />
