@@ -2,11 +2,15 @@ import { useEffect, useState } from "react"
 import netlifyIdentity from "netlify-identity-widget"
 import type { User } from "netlify-identity-widget"
 
+const IS_LOCAL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+
 export function AuthGate({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
-  const [ready, setReady] = useState(false)
+  const [ready, setReady] = useState(IS_LOCAL)
 
   useEffect(() => {
+    if (IS_LOCAL) return
+
     netlifyIdentity.on("init", (u) => {
       setUser(u)
       setReady(true)
@@ -19,7 +23,11 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
 
     netlifyIdentity.init()
 
+    // Filet de sécurité : si "init" ne se déclenche pas dans les 3s, on débloque
+    const fallback = setTimeout(() => setReady(true), 3000)
+
     return () => {
+      clearTimeout(fallback)
       netlifyIdentity.off("init")
       netlifyIdentity.off("login")
       netlifyIdentity.off("logout")
@@ -28,7 +36,7 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
 
   if (!ready) return null
 
-  if (!user) {
+  if (!IS_LOCAL && !user) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center gap-6 bg-[var(--color-background)]">
         <div className="text-center space-y-1">
